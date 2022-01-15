@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="feature-card">
-      <router-link to="/movie/asd123">
+      <router-link to="/movie/tt2953050">
         <img src="https://image.cnbcfm.com/api/v1/image/106980045-1637766874360-Encanto_Cropped_1.jpg?v=1637767028&w=929&h=523" class="featured-image">
         <div class="details">
           <h3> Encanto (2021) </h3>
@@ -18,7 +18,19 @@
 
     <div class="movies-list">
       <h3 v-if="movies"> Movies </h3>
-      <div class="loading" v-if="isLoading"></div>
+      <!-- <div class="loading" v-if="isLoading"></div> -->
+
+      <div class="middle" v-if="isLoading">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+        <div class="bar bar7"></div>
+        <div class="bar bar8"></div>
+      </div>
+
       <div class="movie" v-for="movie in movies" :key="movie.imdbID">
         <router-link :to="'/movie/' + movie.imdbID">
           <div class="movie-img">
@@ -208,28 +220,61 @@ a {
   padding: 0 !important;
   margin: 0 !important;
 }
-.loading {
+.middle {
+  top: 78%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+.bar {
+  width: 10px;
+  height: 70px;
+  background: #fff;
   display: inline-block;
-  width: 80px;
-  height: 80px;
+  transform-origin: bottom center;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  /*   box-shadow:5px 10px 20px inset rgba(255,23,25.2); */
+  animation: loader 1.2s linear infinite;
 }
-.loading:after {
-  content: " ";
-  display: block;
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid #fff;
-  border-color: #fff transparent #fff transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
+.bar1 {
+  animation-delay: 0.1s;
 }
-@keyframes loading {
+.bar2 {
+  animation-delay: 0.2s;
+}
+.bar3 {
+  animation-delay: 0.3s;
+}
+.bar4 {
+  animation-delay: 0.4s;
+}
+.bar5 {
+  animation-delay: 0.5s;
+}
+.bar6 {
+  animation-delay: 0.6s;
+}
+.bar7 {
+  animation-delay: 0.7s;
+}
+.bar8 {
+  animation-delay: 0.8s;
+}
+
+@keyframes loader {
   0% {
-    transform: rotate(0deg);
+    transform: scaleY(0.1);
+    background: ;
+  }
+  50% {
+    transform: scaleY(1);
+    background: yellowgreen;
   }
   100% {
-    transform: rotate(360deg);
+    transform: scaleY(0.1);
+    background: transparent;
   }
 }
+
 </style>
