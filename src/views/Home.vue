@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="feature-card">
-      <router-link to="/movie/tt2953050">
+      <router-link to="/movie/asd123">
         <img src="https://image.cnbcfm.com/api/v1/image/106980045-1637766874360-Encanto_Cropped_1.jpg?v=1637767028&w=929&h=523" class="featured-image">
         <div class="details">
           <h3> Encanto (2021) </h3>
@@ -221,7 +221,7 @@ a {
   margin: 0 !important;
 }
 .middle {
-  top: 78%;
+  top: 70%;
   left: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
@@ -265,7 +265,6 @@ a {
 @keyframes loader {
   0% {
     transform: scaleY(0.1);
-    background: ;
   }
   50% {
     transform: scaleY(1);
