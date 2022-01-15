@@ -17,7 +17,8 @@
     </form>
 
     <div class="movies-list">
-      <h3> Movies </h3>
+      <h3 v-if="movies"> Movies </h3>
+      <div class="loading" v-if="isLoading"></div>
       <div class="movie" v-for="movie in movies" :key="movie.imdbID">
         <router-link :to="'/movie/' + movie.imdbID">
           <div class="movie-img">
@@ -35,31 +36,56 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import env from '../env';
 
 export default {
-  setup() {
-    const search = ref("");
-    const movies = ref([]);
+  // setup() {
+  //   const search = ref("");
+  //   const movies = ref([]);
+  //   let isLoading = false;
 
-    const SearchMovies = () => {
-      if (search.value != "") {
-        fetch(`https://www.omdbapi.com/?apikey=${env.apiKey}&s=${search.value}`)
+    // const SearchMovies = () => {
+    //   if (search.value != "") {
+    //     fetch(`https://www.omdbapi.com/?apikey=${env.apiKey}&s=${search.value}`)
+    //       .then(response => response.json())
+    //       .then(data => {
+    //         movies.value = data.Search;
+    //         search.value = "";
+    //         isLoading.value = true;
+    //       })
+    //   }
+    // }
+
+  //   return {
+  //     search,
+  //     movies,
+  //     SearchMovies,
+  //     isLoading
+  //   }
+  // },
+  data() {
+    return {
+      isLoading: false,
+      search: '',
+      movies: [],
+    };
+  },
+  methods: {
+    SearchMovies() {
+        this.isLoading = true
+        if (this.search.value != "") {
+        fetch(`https://www.omdbapi.com/?apikey=${env.apiKey}&s=${this.search}`)
           .then(response => response.json())
           .then(data => {
-            movies.value = data.Search;
-            search.value = "";
+            this.movies = data.Search;
+            this.search = "";
+            this.isLoading = false
           })
       }
     }
-
-    return {
-      search,
-      movies,
-      SearchMovies
-    }
   }
+  
 }
 </script>
 
@@ -181,5 +207,12 @@ a {
   color: #fff;
   padding: 0 !important;
   margin: 0 !important;
+}
+.loading {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
 }
 </style>
